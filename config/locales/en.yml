@@ -9,10 +9,13 @@ en:
         one: Relation Type
         other: Relation Types
   spree:
-    new_relation_type: New Relation Type
-    related_product_discount: Related Product Discount
-    applies_to: Applies To
-    related_products: Related Products
     add_related_product: Add Related Product
+    admin:
+      tab: 
+        relation_types: Relation Types
+    applies_to: Applies To
     name_or_sku_short: Name or SKU
+    new_relation_type: New Relation Type
     no_relation_types: You need to configure Relation Types before you can use this feature.
+    related_products: Related Products
+    related_product_discount: Related Product Discount

@@ -9,10 +9,10 @@ RSpec.describe Spree::RelationType, type: :model do
     it { is_expected.to validate_uniqueness_of(:name).case_insensitive }
 
     it 'does not create duplicate names' do
-      create(:relation_type, name: 'Gears')
+      create(:product_relation_type, name: 'Gears')
       expect {
-        create(:relation_type, name: 'gears')
-      }.to raise_error
+        create(:product_relation_type, name: 'gears')
+      }.to raise_error(ActiveRecord::RecordInvalid)
     end
   end
 end

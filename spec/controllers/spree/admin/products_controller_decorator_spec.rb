@@ -4,12 +4,11 @@ RSpec.describe Spree::Admin::ProductsController, type: :controller do
   let(:user) { create(:user) }
   let(:product) { create(:product) }
 
-  before { allow(controller).to receive(:spree_current_user).and_return(user) }
-  after  { Spree::Admin::ProductsController.clear_overrides! }
+  before { stub_authentication! }
 
   context 'related' do
     it 'is not routable' do
-      spree_get :related, id: product.id
+      get :related, params: { id: product.id }
       expect(response.status).to be(200)
     end
 

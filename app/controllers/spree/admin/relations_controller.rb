@@ -8,7 +8,8 @@ module Spree
       def create
         @relation = Relation.new(relation_params)
         @relation.relatable = @product
-        @relation.related_to = Spree::Variant.find(relation_params[:related_to_id]).product
+        @relation.related_to = @relation.relation_type.applies_to
+          .constantize.find(relation_params[:related_to_id])
         @relation.save
 
         respond_with(@relation)
@@ -33,18 +34,16 @@ module Spree
 
       def destroy
         @relation = Relation.find(params[:id])
-        @relation.destroy
-
         if @relation.destroy
           flash[:success] = flash_message_for(@relation, :successfully_removed)
 
           respond_with(@relation) do |format|
-            format.html { redirect_to location_after_destroy }
-            format.js   { render_js_for_destroy }
+            format.html { redirect_back(fallback_location: admin_product_path(@product)) }
+            format.js   { render partial: "spree/admin/shared/destroy" }
           end
         else
           respond_with(@relation) do |format|
-            format.html { redirect_to location_after_destroy }
+            format.html { redirect_back(fallback_location: admin_product_path(@product)) }
           end
         end
       end
@@ -63,7 +62,6 @@ module Spree
           :related_to_id,
           :discount_amount,
           :relation_type_id,
-          :related_to_type,
           :position
         ]
       end

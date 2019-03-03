@@ -9,9 +9,9 @@
   <thead>
     <tr data-hook="products_header">
       <th></th>
-      <th><%= Spree.t(:name) %></th>
-      <th><%= Spree.t(:type) %></th>
-      <th><%= Spree.t(:discount_amount) %></th>
+      <th><%= I18n.t('spree.name') %></th>
+      <th><%= I18n.t('spree.type') %></th>
+      <th><%= I18n.t('spree.discount_amount') %></th>
       <th class="actions"></th>
     </tr>
   </thead>
@@ -22,9 +22,9 @@
           <span class="icon icon-move handle"></span>
         </td>
         <% if defined? Spree::Frontend %>
-          <td><%= link_to relation.related_to.name, relation.related_to %></td>
+          <td><%= link_to relation.related_to.name_for_relation, frontend_related_resource_url(relation.related_to) %></td>
         <% else %>
-          <td><%= link_to relation.related_to.name, admin_product_path(relation.related_to) %></td>
+          <td><%= link_to relation.related_to.name_for_relation, backend_related_resource_url(relation.related_to) %></td>
         <% end %>
         <td><%= relation.relation_type.name %></td>
         <td>
@@ -32,7 +32,7 @@
             <div class="input-group">
               <%= f.text_field :discount_amount, class: 'form-control text-center' %>
               <span class="input-group-btn">
-                <%= f.button Spree.t(:update), type: 'submit', class: 'btn btn-primary' %>
+                <%= f.button I18n.t('spree.update'), type: 'submit', class: 'btn btn-primary' %>
               </span>
             </div>
           <% end %>

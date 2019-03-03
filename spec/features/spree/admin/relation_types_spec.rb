@@ -6,7 +6,7 @@ RSpec.feature 'Admin Relation Types', :js do
   end
 
   scenario 'when no relation types exists' do
-    expect(page).to have_text 'No Relation Types found, Add One!'
+    expect(page).to have_text /NO RELATION TYPES FOUND, ADD ONE!/i
   end
 
   context 'create' do
@@ -48,7 +48,7 @@ RSpec.feature 'Admin Relation Types', :js do
   context 'with records' do
     background do
       %w(Gears Equipments).each do |name|
-        create(:relation_type, name: name)
+        create(:product_relation_type, name: name)
       end
       visit spree.admin_relation_types_path
     end
@@ -66,7 +66,7 @@ RSpec.feature 'Admin Relation Types', :js do
     context 'edit' do
       background do
         within_row(1) { click_icon :edit }
-        expect(current_path).to eq spree.edit_admin_relation_type_path(1)
+        expect(page).to have_current_path(spree.edit_admin_relation_type_path(1))
       end
 
       scenario 'can update an existing relation type' do
@@ -87,7 +87,7 @@ RSpec.feature 'Admin Relation Types', :js do
       scenario 'can remove records' do
         within_row(1) do
           expect(column_text(1)).to eq 'Gears'
-          click_icon :delete
+          click_icon :trash
         end
         page.driver.browser.switch_to.alert.accept unless Capybara.javascript_driver == :poltergeist
         expect(page).to have_text 'successfully removed!'

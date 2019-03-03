@@ -1,13 +1,25 @@
 # Related Products
 
-[![Build Status](https://travis-ci.org/spree-contrib/spree_related_products.svg?branch=master)](https://travis-ci.org/spree-contrib/spree_related_products)
-[![Code Climate](https://codeclimate.com/github/spree-contrib/spree_related_products/badges/gpa.svg)](https://codeclimate.com/github/spree-contrib/spree_related_products)
+For [Open][1] store, this extension provides a generic way to define different types of relationships between products, by defining a RelationType for each type of relationship you'd like to maintain.
 
-Related Products is a [Spree Commerce](https://github.com/spree/spree) extension that provides a generic way for you to define different types of relationships between your products, by defining a RelationType for each type of relationship you'd like to maintain.
+Admistrator can manage RelationTypes via the admin configuration menu, and maintain product relationships via __Related Products__ tab on the edit product UI.
 
-You can manage RelationTypes via the admin configuration menu, and you can maintain product relationships via __Related Products__ tab on the edit product UI.
+## Installation
 
-### Possible uses
+Add to `Gemfile`:
+```ruby
+gem 'open_related_products', github: '99cm/open_related_products'
+```
+
+Run:
+```sh
+$ bundle install
+$ bundle exec rails g open_related_products:install
+```
+
+If your server was running, restart it so that it can find the assets properly.
+
+## Possible uses
 
 * Accessories
 * Cross Sells
@@ -16,7 +28,7 @@ You can manage RelationTypes via the admin configuration menu, and you can maint
 * Replacement Products
 * Warranty & Support Products
 
-### Relation Types
+## Relation Types
 
 When you create a RelationType you can access that set of related products by referencing the relation_type name, see below for an example:
 ```ruby
@@ -50,55 +62,17 @@ You can optionally specify a discount amount to be applied if a customer purchas
 
 Note: In order for the coupon to be automatically applied, you must create a promotion leaving the __code__ value empty, and adding an Action of type : __RelatedProductDiscount__  (blank codes are required for coupons to be automatically applied).
 
----
-
-## Installation
-
-1. Add this extension to your Gemfile with this line:
-
-  #### Spree >= 3.1
-
-  ```ruby
-  gem 'spree_related_products', github: 'spree-contrib/spree_related_products'
-  ```
-
-  #### Spree 3.0 and Spree 2.x
-
-  ```ruby
-  gem 'spree_related_products', github: 'spree-contrib/spree_related_products', branch: 'X-X-stable'
-  ```
-
-  The `branch` option is important: it must match the version of Spree you're using.
-  For example, use `3-0-stable` if you're using Spree `3-0-stable` or any `3.0.x` version.
-
-2. Install the gem using Bundler:
-  ```ruby
-  bundle install
-  ```
-
-3. Copy & run migrations
-  ```ruby
-  bundle exec rails g spree_related_products:install
-  ```
-
-4. Restart your server
-
-  If your server was running, restart it so that it can find the assets properly.
-
-
----
-
 ## Contributing
 
 See corresponding [guidelines][4]
 
 ---
 
-Copyright (c) 2010-2015 [Brian Quinn][5] and [contributors][6], released under the [New BSD License][3]
+Copyright (c) 2019 [Leo Wang][5] and [contributors][6], released under the [New BSD License][3]
 
-[1]: http://www.fsf.org/licensing/essays/free-sw.html
-[2]: https://github.com/spree-contrib/spree_related_products/issues
-[3]: https://github.com/spree-contrib/spree_related_products/blob/master/LICENSE.md
-[4]: https://github.com/spree-contrib/spree_related_products/blob/master/CONTRIBUTING.md
-[5]: https://github.com/BDQ
-[6]: https://github.com/spree-contrib/spree_related_products/graphs/contributors
+[1]: https://github.com/99cm/open
+[2]: https://github.com/99cm/open_related_products/issues
+[3]: https://github.com/99cm/open_related_products/blob/master/LICENSE.md
+[4]: https://github.com/99cm/open_related_products/blob/master/CONTRIBUTING.md
+[5]: https://github.com/99cm
+[6]: https://github.com/99cm/open_related_products/graphs/contributors
